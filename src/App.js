@@ -1,26 +1,46 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Component } from 'react';
 import './App.css';
+import Validation from './components/Validation/Validation';
+import Char from './components/Char/Char';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  state = { enteredText: '' }
+
+  getEnteredText = (event) => {
+    this.setState({ enteredText: event.target.value })
+  }
+
+  removeLetter = (charIndex) => {
+    const splittedText = this.state.enteredText.split('')
+    splittedText.splice(charIndex, 1)
+    const newText = splittedText.join('')
+    this.setState({ enteredText: newText })
+  }
+
+  render() {
+    return (
+      <div>
+        <input 
+          type="text"
+          value={this.state.enteredText}
+          onChange={this.getEnteredText}
+        />
+        <p>Entered text length: {this.state.enteredText.length}</p>
+        <Validation length={this.state.enteredText.length}/>
+        {
+          this.state.enteredText.split('').map((letter, index) => {
+            return (
+              <Char 
+                key={index}
+                letter={letter}
+                clicked={() => this.removeLetter(index)}
+              />
+            )
+          })
+        }
+      </div>
+    )
+  }
 }
 
 export default App;
