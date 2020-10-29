@@ -13,7 +13,7 @@ const burger = props => {
     return ary.concat(element)
   }, [])
 
-  if (transformedIngredients.length == 0) {
+  if (transformedIngredients.length === 0) {
     transformedIngredients = <p>Please, start adding ingredients!</p>
   }
 
