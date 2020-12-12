@@ -20,7 +20,7 @@ class Orders extends Component {
         return <Order 
           key={order.id} 
           ingredients={order.ingredients}
-          price={order.price} />
+          price={order.price.toFixed(2)} />
       })
     }
 
