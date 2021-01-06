@@ -10,3 +10,5 @@ class Users extends Component {
     )
   }
 }
+
+export default Users
